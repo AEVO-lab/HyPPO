@@ -38,7 +38,7 @@ To do this, the user needs to provide the name of the module that should execute
 Please refer to the argument documentation and to the hyppo_classes.py file for more information on 
 the available modules.
 
-Consult the hyppo_classes.py fiel for more information on creating new modules.
+Consult the hyppo_classes.py file for more information on creating new modules.
 
 '''
 
@@ -51,7 +51,7 @@ workdir = ""
 outdir = ""
 fullmode = ""
 speciestree_filename = ""
-mode_string = ""
+mode_string = "default"
 species_separator = "__"
 species_index = "0"
 timefile = ""
@@ -65,7 +65,7 @@ arg_cluster_sp_mode = ""
 other_args = {}
 other_args_str = ""
 
-help_arg = false
+help_arg = False
 
 rename_genes = False
 
@@ -110,40 +110,40 @@ for arg in sys.argv[1:]:
     timefile = arg.split("=")[1]
   if arg in ["--use_cache", "--use_clustal", "--use_speciestree_cache"]:
     other_args[arg.replace("--", "")]  = "1"
-  if arg in ["--help", "-h"]
+  if arg in ["--help", "-h"]:
     help_arg = True
 
 	
 help_params = []
-help_params.append(["--infiles="], "Set of input sequence files (in fasta or phylip format), separated by a comma.  e.g. --infiles=seq1.fa,seq2.fa")
-help_params.append(["--workdir="], "Directory for temporary files.  HyPPO will not delete nor cleanup.  Useful for caching long tasks such as alignements.")
-help_params.append(["--mode_string="], "Recommended to be set by user.  Suffix of the temporary and out files.  The generated files will have this string preceding the extension.  Helps avoid overwriting files when running different modes.  Default:empty.")
-help_params.append(["--outdir="], "Output directory.")
-help_params.append(["--scores_mode="], "Set the hyppo class to use to compute pairwise scores.  Default: hyppo_classes.ScoresPctID.  Recommended: hyppo_classes.MAFFTPctID if MAFFT is installed.")
-help_params.append(["--cluster_init_mode="], "Set the hyppo class to compute the initial set of clusters (without the species tree).  Default: hyppo_classes.MaxScoreClusterPredictor.")
-help_params.append(["--sptree_mode="], "Set the hyppo class to compute the species tree from the clusters.  Default: hyppo_classes.BottomUpSpeciesTreeMaker.")
-help_params.append(["--cluster_sp_mode="], "Set the hyppo class to compute the set of clusters using the species tree.  Default: None")
-help_params.append(["--intercluster_mode="], "Set the hyppo class to compute the inter cluster relations.  Default: GreedyInterClusterPredictor")
-help_params.append(["--fullmode="], "Use a special class that implements all four steps in its own manner.  Not set by default.  If set, overrides all step-specific class specified.  e.g. --fullmode=hyppo_classes.OMAPredictor.")
-help_params.append(["--speciestree="], "Filename of the species tree, in newick format, if 'true' species tree is known.  Default: not set.")
-help_params.append(["--species_separator="], "The character in the gene names that is used to separate the gene name from the species name.  Default:__ (double-underscore)")
-help_params.append(["--species_index="], "The position of the species name in the gene name, after separation by the separator.  Default:0")
-help_params.append(["--use_cache"], "If set, the argument 'use_cache' is passed to the hyppo classes.  These classes may or may not use it.  Most classes that compute alignements use it to avoid re-computing the alignment.")
+help_params.append(["--infiles=", "Set of input sequence files (in fasta or phylip format), separated by a comma.  e.g. --infiles=seq1.fa,seq2.fa"])
+help_params.append(["--workdir=", "Directory for temporary files.  HyPPO will not delete nor cleanup.  Useful for caching long tasks such as alignements."])
+help_params.append(["--mode_string=", "Recommended to be set by user.  Suffix of the temporary and out files.  The generated files will have this string preceding the extension.  Helps avoid overwriting files when running different modes.  Default:empty."])
+help_params.append(["--outdir=", "Output directory."])
+help_params.append(["--scores_mode=", "Set the hyppo class to use to compute pairwise scores.  Default: hyppo_classes.ScoresPctID.  Recommended: hyppo_classes.MAFFTPctID if MAFFT is installed."])
+help_params.append(["--cluster_init_mode=", "Set the hyppo class to compute the initial set of clusters (without the species tree).  Default: hyppo_classes.MaxScoreClusterPredictor."])
+help_params.append(["--sptree_mode=", "Set the hyppo class to compute the species tree from the clusters.  Default: hyppo_classes.BottomUpSpeciesTreeMaker."])
+help_params.append(["--cluster_sp_mode=", "Set the hyppo class to compute the set of clusters using the species tree.  Default: None"])
+help_params.append(["--intercluster_mode=", "Set the hyppo class to compute the inter cluster relations.  Default: GreedyInterClusterPredictor"])
+help_params.append(["--fullmode=", "Use a special class that implements all four steps in its own manner.  Not set by default.  If set, overrides all step-specific class specified.  e.g. --fullmode=hyppo_classes.OMAPredictor."])
+help_params.append(["--speciestree=", "Filename of the species tree, in newick format, if 'true' species tree is known.  Default: not set."])
+help_params.append(["--species_separator=", "The character in the gene names that is used to separate the gene name from the species name.  Default:__ (double-underscore)"])
+help_params.append(["--species_index=", "The position of the species name in the gene name, after separation by the separator.  Default:0"])
+help_params.append(["--use_cache", "If set, the argument 'use_cache' is passed to the hyppo classes.  These classes may or may not use it.  Most classes that compute alignements use it to avoid re-computing the alignment."])
 
-help_params.append(["--nbiter="], "maximum number of iterations of the species tree - cluster loop to perform.  Only used if cluster_sp_mode is set.  Default: 10")
-help_params.append(["--timefile="], "Filename of a file in which the total time taken is output.  Default: not set")
-help_params.append(["--rename_genes"], "When this flag is set, every gene in the work dir is renamed uniquely.  We append the index of the gene family to the name of every gene.  Useful if input sequence files have gene names in common.")
-help_params.append(["--other_args="], "Other arguments that are not used directly, but are sent to each hyppo class.  Refer to the hyppo classes for specific usage.  The format is --other_args=param1=value1;;param2=value2;;param3=value3")
+help_params.append(["--nbiter=", "maximum number of iterations of the species tree - cluster loop to perform.  Only used if cluster_sp_mode is set.  Default: 10"])
+help_params.append(["--timefile=", "Filename of a file in which the total time taken is output.  Default: not set"])
+help_params.append(["--rename_genes", "When this flag is set, every gene in the work dir is renamed uniquely.  We append the index of the gene family to the name of every gene.  Useful if input sequence files have gene names in common."])
+help_params.append(["--other_args=", "Other arguments that are not used directly, but are sent to each hyppo class.  Refer to the hyppo classes for specific usage.  The format is --other_args=param1=value1;;param2=value2;;param3=value3"])
 
 
 
 helpstr = "HyPPO (Hybrid Prediction of Paralogs and Orthologs \n\n"
 helpstr += "--infiles is the only required argument, and consists in a list of sequence filenames.  Currently, fasta and phylip are supported.  The extension of the sequence filenames must be in {.fa, .fasta, .fst, .phy, .phylip}\n\n"
 helpstr += "The user can specify which module to use for each step of the pipeline.  Please refer to the argument list below, and to the hyppo classes documentation for more informaiton.\n\n"
-helpstr += "The gene names in the sequence files are expected to contain the name of the species that contains them.  There must be a string separating the gene name from the species name.  For instance, a gene name could be HUMAN__POP1.  The default separator is '__' (double underscore), and the position of the species in this string is 0 by default.  This can be changed using the species_separator and species_index arguments.  For instance, if your gene string is POP1_HUMAN, set --species_separator='_' and --species_index=1.  What really matters is that hyppo finds the species name at the given index - the rest of the name does not matter.  For instance, POP1_HUMAN_SOME_RANDOM|ANNOTATION with the same separator/index will work.\n\n"
+helpstr += "The gene names in the sequence files are expected to contain the name of the species that contains them.  There must be a string separating the gene name from the species name.  For instance, a gene name could be HUMAN__POP1.  The default separator is '__' (double underscore), and the position of the species in this string is 0 by default.  This can be changed using the species_separator and species_index arguments.  For instance, if your gene string is POP1_HUMAN, set --species_separator='_' and --species_index=1.  What really matters is that hyppo finds the species name at the given index - the rest of the name does not matter.  For instance, POP1_HUMAN_SOME_RANDOM|ANNOTATION with the same separator/index will work.\n\nThe full list of arguments is below.  Arguments ending with a = need to be assigned a value, the others are flags that do not need a value.\n\n"
 
 for hp in help_params:
-	helpstr += hp[0] + "\t\t" + hp[1]
+	helpstr += hp[0].ljust(25) + hp[1] + "\n"
 
 if help_arg:
 	print(helpstr)

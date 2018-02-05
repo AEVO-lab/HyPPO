@@ -3,7 +3,6 @@ import sys
 import random
 import hyppo_classes
 import os
-import numpy
 import math
 from os import listdir
 from os.path import isfile, join
