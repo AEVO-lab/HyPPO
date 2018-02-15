@@ -5,15 +5,18 @@ HyPPO is a program that takes as input as set of gene sequences (DNA or AA) and 
 
 To use the default settings, run
 
-\> python3 hyppo.py --infiles=myfile1.fa,myfile2.fa,myfile3.fa
+\> python3 hyppo.py --infiles=myfile1.fa,myfile2.fa,myfile3.fa --workdir=./work --outdir=./out
 
-where the files, separated by a comma, are aligned fasta of phylip sequence files.  
+where the files, separated by a comma, are *aligned* fasta of phylip sequence files.  
+If the sequences are not aligned, a naive Needleman-Wunsch implementation that maximizes identical pairs  will be used.
 The gene names must have the format SPECIES__GENE to identify their species (the format can be changed, see below).
 
 It is highly recommended to specify a --workdir=[workdir] directory, as HyPPO can create many temporary files.
 An --outdir=[outdir] directory can also be specified. 
 The modules to be used by HyPPO can also be specified, see below for more information.
 
+The experiments/ directory contains the script that were used to simulate the trees and run the experiments.
+Please refer to experiments/README.txt for more information.
 
 # Prerequisites, compiling and running
 

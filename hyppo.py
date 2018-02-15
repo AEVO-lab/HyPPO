@@ -61,6 +61,8 @@ compute_pctid = False
 arg_scores_mode = ""
 arg_cluster_init_mode = ""
 arg_cluster_sp_mode = ""
+arg_sptree_mode = ""
+arg_intercluster_mode = ""
 
 other_args = {}
 other_args_str = ""
