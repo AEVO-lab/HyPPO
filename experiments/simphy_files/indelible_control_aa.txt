@@ -1,0 +1,35 @@
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+//  Modified from: INDELible V1.03 control file - basic.txt                        //
+//                                                                                 //
+//      A basic introduction to the structure of the INDELible control file input  //
+//    for the INDELible_wrapper script distributed with SimPhy.		           //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+
+// It is useful to know that anything on a line after two forward slashes is ignored.
+
+/*
+   Another useful thing to know is that anything after a forward slash and star
+   is ignored until INDELible finds a star followed by a forward slash later on.
+*/     
+
+[TYPE] AMINOACID 1	//  EVERY control file must begin with a [TYPE] command.
+			//  The value can be NUCLEOTIDE, AMINOACID or CODON depending 
+			//  on what kind of simulation you want to perform but must be in 
+			//  upper case. The second parameter can be 1 or 2 and chooses the 
+			//  algorithm that INDELible uses (see manuscript). Both give 
+			//  identical results but in some cases one is quicker.
+			//  Other blocks and commands following this statement
+			//  can come in any order you like.
+
+[SIMPHY-UNLINKED-MODEL]	simple_unlinked  	//  [UNLINKED-MODEL] blocks are similar to [MODEL] blocks, but they will
+						// generate independent models for every partition/tree using this section 
+	[submodel]	WAG
+	[statefreq] $(d:1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1) // Equilibrium frequencies sampled from a 16-dimensional Dirichlet 
+	[rates] 0 $(e:2) 0 // Site-specific rate heterogeneities: 0 p-inv, alpha from an E(2) and using a continuous gamma distribution.
+	[indelmodel] POW $(u:1.5,2) 10 // Zipfian distribution with a parameter from 1.5 to 2 and a fixed maximum indel size of 10 nucleotides.
+	[indelrate] $(u:0.001,0.002) // Insertion rate= deletion rate, and range from 0.001 to 0.002 the substitution rate.
+	
+[SIMPHY-PARTITIONS] simple [1 simple_unlinked $(n:1000,100)] // Every tree will have its own model, obtained by sampling the simple_unlinked. Their lengths are sampled from a Normal with mean=1000 and sd=1000
+[SIMPHY-EVOLVE] 1 alignment // One replicate of each alignment, saved in files with alignment as common prefix.
