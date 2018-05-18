@@ -12,7 +12,9 @@ for arg in sys.argv[1:]:
     pz = arg.split("=")
     inclusters = pz[1]
 	
-	
+if inclusters == "":
+	print("This program converts a .clusters file to a .gexf file.  These are used by various graph visualization software such as gephi.  Please specify as clusters file with the --inclusters= argument.  The gexf file is printed directly to the standard output.")
+	sys.exit()
 	
 f = open(inclusters, 'r')
 
