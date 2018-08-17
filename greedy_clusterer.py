@@ -86,7 +86,7 @@ class GreedyClusterer:
 	def find_clusters(self):
 		
 		done = False
-
+		
 		###################################################
 		#1st pass: merge all direct favorite clusters with no common species
 		while not done:
@@ -112,6 +112,7 @@ class GreedyClusterer:
 		###################################################
 		#2nd pass: find more clusters to join
 		done = False
+		
 		
 		while not done:
 			
@@ -175,7 +176,7 @@ class GreedyClusterer:
 		maxj = -1
 		max = -1
 		for j in range(len(self.matrix)):
-			if i != j and self.matrix[i][j] > max:
+			if i != j and self.matrix[i][j] > max and (not allow_same_species or not have_common_species(i,j)):
 				maxj = j
 				max = self.matrix[i][j]
 		return maxj
