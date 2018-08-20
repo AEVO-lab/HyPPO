@@ -176,7 +176,7 @@ class GreedyClusterer:
 		maxj = -1
 		max = -1
 		for j in range(len(self.matrix)):
-			if i != j and self.matrix[i][j] > max and (not allow_same_species or not have_common_species(i,j)):
+			if i != j and self.matrix[i][j] > max and (not allow_same_species or not self.have_common_species(i,j)):
 				maxj = j
 				max = self.matrix[i][j]
 		return maxj
