@@ -178,7 +178,7 @@ vector<int> ClusterFinder::GetClustersWithBestOutsiderAgreement(Cluster* cl, vec
             for (int d = 0; d < cl_sibl.size(); d++)
             {
                 double avg = GetAverageWeight(cls[c], cl_sibl[d]);
-                sum_of_diff += abs(averages[d] - avg);
+                sum_of_diff += abs((double)(averages[d] - avg));
             }
 
             if (sum_of_diff < min_sum_of_diff)
