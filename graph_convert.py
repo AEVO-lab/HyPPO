@@ -121,8 +121,8 @@ for pair in all_orthologs:
 
 	if g1 != g2:
 		
-			edgestr += '<edge id="' + str(cptedge) + '" weight="0.1" source="' + str(gene_node_ids[pair[0]]) + '" target="' + str(gene_node_ids[pair[1]]) + '">\n'
-			edgestr += '<viz:color hex="#000000" />\n'
+			edgestr += '<edge id="' + str(cptedge) + '" weight="0.5" source="' + str(gene_node_ids[pair[0]]) + '" target="' + str(gene_node_ids[pair[1]]) + '">\n'
+			edgestr += '<viz:color r="200" g="200" b="200" a="0.9" />\n'
 			edgestr += '</edge>\n'
 			cptedge += 1
 
