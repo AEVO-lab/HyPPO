@@ -67,6 +67,8 @@ arg_intercluster_mode = ""
 other_args = {}
 other_args_str = ""
 
+relations_format = "line"
+
 help_arg = False
 
 rename_genes = False
@@ -114,6 +116,8 @@ for arg in sys.argv[1:]:
     other_args[arg.replace("--", "")]  = "1"
   if arg in ["--help", "-h"]:
     help_arg = True
+  if arg.startswith("--relations_format="):
+    relations_format = arg.split("=")[1]
 
 	
 help_params = []
@@ -135,7 +139,9 @@ help_params.append(["--use_cache", "If set, the argument 'use_cache' is passed t
 help_params.append(["--nbiter=", "maximum number of iterations of the species tree - cluster loop to perform.  Only used if cluster_sp_mode is set.  Default: 10"])
 help_params.append(["--timefile=", "Filename of a file in which the total time taken is output.  Default: not set"])
 help_params.append(["--rename_genes", "When this flag is set, every gene in the work dir is renamed uniquely.  We append the index of the gene family to the name of every gene.  Useful if input sequence files have gene names in common."])
+help_params.append(["--relations_format", "Format of the relations output file.  If equal to 'line', the relations file has one relation per line of the form 'gene1 gene2 relationType'.  If anything else than line, keeps the original hyppo format."])
 help_params.append(["--other_args=", "Other arguments that are not used directly, but are sent to each hyppo class.  Refer to the hyppo classes for specific usage.  The format is --other_args=param1=value1;;param2=value2;;param3=value3"])
+
 
 
 
@@ -439,6 +445,18 @@ else:
 		outfile = join(outdir, os.path.basename(basefile) + "." + mode_string + ".relations")
 		print("Copying " + relsfile + " to " + outfile)
 		copyfile(relsfile, outfile)
+		
+		
+		
+		#change format if not original
+		if relations_format == "line":
+			cmd = "python3 hyppo_utils.py --mode=relations_reformat --infile=\"" + outfile + "\" --outfile=\"" + outfile + "\""
+			os.system(cmd)
+	
+	
+	
+	
+	
 	
 		
 if timefile != "":

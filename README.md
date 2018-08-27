@@ -102,7 +102,17 @@ gene4 \
 
 where each \<GROUP\> corresponds to an orthology cluster.
 
-The .relations file has two lines, one for the gene tree that displays the relations, and one that has the relations.
+Since the August 27th 2018 version, the .relations file contains each pairwise relation, one per line.
+The format of a line is 
+
+gene1 gene2 reltype
+
+where reltype is either 'Orthologs' or 'Paralogs'
+
+
+
+Users who prefer the legacy format can specify the argument --relations_format=legacy
+The legacy format has two lines, one for the gene tree that displays the relations, and one that has the relations.
 The format is 
 
 TREE=(the tree in newick format) \
@@ -149,6 +159,7 @@ POP1_HUMAN_SOME_RANDOM|ANNOTATION with the same separator/index will work.
 --nbiter=                maximum number of iterations of the species tree - cluster loop to perform.  Only used if cluster_sp_mode is set.  Default: 10
 --timefile=              Filename of a file in which the total time taken is output.  Default: not set
 --rename_genes           When this flag is set, every gene in the work dir is renamed uniquely.  We append the index of the gene family to the name of every gene.  Useful if input sequence files have gene names in common.
+--relations_format=      Either 'line' or 'legacy'.  Line format has one relation per line, legacy format is explained above.  Default: line
 --other_args=            Other arguments that are not used directly, but are sent to each hyppo class.  Refer to the hyppo classes for specific usage.  The format is --other_args=param1=value1;;param2=value2;;param3=value3
 
 </pre>
