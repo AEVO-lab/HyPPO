@@ -8,7 +8,7 @@ To use the default settings, run
 \> python3 hyppo.py --infiles=myfile1.fa,myfile2.fa,myfile3.fa --workdir=./work --outdir=./out
 
 where the files, separated by a comma, are *aligned* fasta of phylip sequence files.  
-If the sequences are not aligned, a naive Needleman-Wunsch implementation that maximizes identical pairs  will be used.
+If the sequences are not aligned, a naive Needleman-Wunsch implementation that maximizes identical pairs  will be used.  There are also options to use other alignment software (see below) - if so mafft is recommended as it wields the most accurate results on simulations.
 The gene names must have the format SPECIES__GENE to identify their species (the format can be changed, see below).
 
 It is highly recommended to specify a --workdir=[workdir] directory, as HyPPO can create many temporary files.
@@ -25,24 +25,16 @@ The core of HyPPO requires python 3 to run (it should in principle work with pyt
 The default modules provided are implemented in C++, and must be compiled.
 
 These modules are all part of the OCR program.  OCR stands for Orthology Cluster Recovery - though the program does more than that now.
-OCR was developed using QtCreator, which generates the makefile provided in the directory. 
-Note that there are no dependencies with the Qt framework.
-Normally, entering the ./OCR directory and running make should do the job.
+To compile, navigate to the OCR directory and run 
 
-\> cd ./OCR
-\> make
+> ./configure
+> make
+> make install
 
-should create the OCR binary. 
-** This binary should then be accessible through the PATH environment variable.
 
-If make does not work and you have Qt installed, you can try to regenreate the makefile, as follows:
+** The OCR binary should be installed in your home bin directory.  If not accessible, the compiled OCR binary will be in the OCR/src directory.  This binary can be used, or copied anywhere else, but importantly the executable must be accessible through the PATH environment variable.
 
-\> cd ./OCR
-\> qmake OCR.pro config+=RELEASE
-\> make
-
-If this still fails, contact me at mlafond2@uottawa.ca and I will create the standard 
-configure - make - make install commands accessible.
+If you cannot compile, contact me at manuel.lafond@USherbrooke.ca
 
 # The HyPPO pipeline
 
